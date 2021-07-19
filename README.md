@@ -1,2 +1,2 @@
 # My-Timer
-Java package timing in Java
+Java package for timing in Java
