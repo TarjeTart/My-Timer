@@ -13,30 +13,21 @@ public final class Timer {
 	public static final long milliInSecond = 1000;
 	
 	private static long start = -1;
-	private static long timer = 0;
 	
 	private Timer() {}
 	
-	public static void startTimer() throws TimerRunningException {
-		if(start != -1)
-			throw new TimerRunningException();
+	public static void startTimer(){
 		start = System.nanoTime();
 	}
 	
-	public static void endTimer() throws TimerNotStartedException {
-		if(start == -1)
+	public static long getTime() throws NoTimerException {
+		if(start==-1) {
 			throw new TimerNotStartedException();
-		timer = System.nanoTime()-start;
-		start = -1;
+		}
+		return System.nanoTime()-start;
 	}
 	
-	public static String getTime() throws NoTimerException {
-		if(timer <= 0)
-			throw new NoTimerException();
-		return timeToString(timer);
-	}
-	
-	private static String timeToString(long nanoTime) {
+	public static String timeToString(long nanoTime) {
 		if(nanoTime >= nanoInDay){
 			return timeToStringDay(nanoTime);
 		}else if(nanoTime >= nanoInHour) {
